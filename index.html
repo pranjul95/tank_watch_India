@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tank Watch India — Shark Tank India Startup Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D0D0D;
+    --paper: #F5F0E8;
+    --saffron: #FF6B2B;
+    --teal: #0A5F55;
+    --gold: #E8A020;
+    --muted: #7A7060;
+    --card-bg: #FFFFFF;
+    --border: #DDD5C5;
+    --success: #1A7A45;
+    --warning: #B85A00;
+    --closed: #8B0000;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* MASTHEAD */
+  .masthead {
+    background: var(--ink);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--saffron);
+  }
+
+  .masthead-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 64px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+
+  .logo-shark {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: var(--saffron);
+    letter-spacing: -0.5px;
+  }
+
+  .logo-sub {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #888;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    align-self: center;
+  }
+
+  nav { display: flex; gap: 1.5rem; align-items: center; }
+
+  nav a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #AAA;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  nav a:hover, nav a.active { color: var(--saffron); }
+
+  .live-tag {
+    background: var(--saffron);
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    padding: 3px 8px;
+    border-radius: 2px;
+    letter-spacing: 1px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--ink);
+    padding: 5rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--saffron), var(--gold), var(--teal));
+  }
+
+  .hero-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--saffron);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title span { color: var(--saffron); }
+
+  .hero-desc {
+    color: #AAA;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 460px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid #2A2A2A;
+  }
+
+  .stat-item { display: flex; flex-direction: column; gap: 4px; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+  }
+
+  .stat-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: #666;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-featured {
+    background: #161616;
+    border: 1px solid #2A2A2A;
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .featured-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .featured-tag::before {
+    content: '';
+    width: 20px; height: 1px;
+    background: var(--gold);
+  }
+
+  .featured-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+
+  .featured-meta {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: #666;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+
+  .featured-update {
+    background: #0D0D0D;
+    border-left: 3px solid var(--saffron);
+    padding: 1rem 1.2rem;
+    border-radius: 0 3px 3px 0;
+    margin-bottom: 1rem;
+  }
+
+  .featured-update p {
+    color: #CCC;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .status-badge::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .badge-thriving { background: #0A2E1A; color: #2ECC71; }
+  .badge-growing { background: #1A2E0A; color: #82E030; }
+  .badge-struggling { background: #2E1A0A; color: #E88020; }
+  .badge-closed { background: #2E0A0A; color: #E04040; }
+  .badge-acquired { background: #0A1A2E; color: #20A0E8; }
+
+  /* FILTERS */
+  .filters-bar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    position: sticky;
+    top: 64px;
+    z-index: 90;
+  }
+
+  .filters-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .filter-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+  .chip {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    color: var(--muted);
+  }
+
+  .chip:hover { border-color: var(--saffron); color: var(--saffron); }
+  .chip.active { background: var(--saffron); border-color: var(--saffron); color: #fff; }
+
+  .search-box {
+    margin-left: auto;
+    position: relative;
+  }
+
+  .search-box input {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    padding: 6px 14px 6px 36px;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    background: var(--paper);
+    color: var(--ink);
+    outline: none;
+    width: 220px;
+    transition: border-color 0.2s;
+  }
+
+  .search-box input:focus { border-color: var(--saffron); }
+
+  .search-box::before {
+    content: '⌕';
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  /* MAIN CONTENT */
+  .main {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--ink);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .section-count {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* STARTUP CARDS */
+  .startup-grid { display: flex; flex-direction: column; gap: 0; }
+
+  .startup-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 4px solid transparent;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    border-bottom: none;
+  }
+
+  .startup-card:first-child { border-radius: 4px 4px 0 0; }
+  .startup-card:last-child { border-radius: 0 0 4px 4px; border-bottom: 1px solid var(--border); }
+  .startup-card:only-child { border-radius: 4px; border-bottom: 1px solid var(--border); }
+
+  .startup-card:hover {
+    background: #FAFAF8;
+    border-left-color: var(--saffron);
+    transform: translateX(2px);
+  }
+
+  .startup-card.card-thriving { border-left-color: #2ECC71; }
+  .startup-card.card-growing { border-left-color: #82E030; }
+  .startup-card.card-struggling { border-left-color: #E88020; }
+  .startup-card.card-closed { border-left-color: #E04040; }
+  .startup-card.card-acquired { border-left-color: #20A0E8; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .card-company {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .card-season {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card-sector {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.75rem;
+    color: var(--muted);
+    background: var(--paper);
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .card-deal {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  .card-update {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .card-sharks {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .shark-pill {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: #EEE8D8;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .card-timestamp {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: #BBB;
+    letter-spacing: 1px;
+  }
+
+  /* SIDEBAR */
+  .sidebar { display: flex; flex-direction: column; gap: 2rem; }
+
+  .sidebar-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    background: var(--ink);
+    padding: 0.8rem 1.2rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .sidebar-content { padding: 1rem 1.2rem; }
+
+  /* LEADERBOARD */
+  .shark-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .shark-row:last-child { border-bottom: none; }
+
+  .shark-rank {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--muted);
+    width: 20px;
+  }
+
+  .shark-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .shark-info { flex: 1; }
+
+  .shark-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .shark-company-tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: var(--muted);
+    letter-spacing: 0.5px;
+  }
+
+  .shark-amount {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--teal);
+  }
+
+  /* DEAL REALITY CHECK */
+  .reality-meter { margin: 1rem 0; }
+
+  .reality-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .reality-bar {
+    height: 8px;
+    background: #EEE8D8;
+    border-radius: 100px;
+    overflow: hidden;
+  }
+
+  .reality-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 1s ease;
+  }
+
+  /* RECENT NEWS */
+  .news-item {
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .news-item:last-child { border-bottom: none; }
+
+  .news-company {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--saffron);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+  }
+
+  .news-text {
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #333;
+    margin-bottom: 0.3rem;
+  }
+
+  .news-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: #BBB;
+    letter-spacing: 1px;
+  }
+
+  /* SEASON SELECTOR */
+  .season-tabs {
+    display: flex;
+    gap: 0;
+    background: #EEE8D8;
+    border-radius: 3px;
+    padding: 3px;
+    margin-bottom: 1.5rem;
+  }
+
+  .season-tab {
+    flex: 1;
+    text-align: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    padding: 6px;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+
+  .season-tab.active {
+    background: var(--ink);
+    color: var(--saffron);
+  }
+
+  /* STATUS OVERVIEW BAR */
+  .status-overview {
+    background: var(--ink);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #222;
+  }
+
+  .status-overview-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .overview-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .overview-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+  }
+
+  .overview-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .overview-count {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--paper);
+    border-radius: 6px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+
+  .modal-header {
+    background: var(--ink);
+    padding: 2rem;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.2s;
+  }
+
+  .modal-close:hover { color: #fff; }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  .modal-body { padding: 2rem; }
+
+  .modal-section { margin-bottom: 2rem; }
+
+  .modal-section-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 0.75rem;
+  }
+
+  .modal-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  .modal-deal-box {
+    background: var(--ink);
+    color: #fff;
+    padding: 1.2rem 1.5rem;
+    border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .deal-field { display: flex; flex-direction: column; gap: 4px; }
+
+  .deal-field-label {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.55rem;
+    color: #666;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .deal-field-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .timeline { border-left: 2px solid var(--border); padding-left: 1.5rem; }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 1.5rem;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -1.6rem;
+    top: 4px;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--saffron);
+    border: 2px solid var(--paper);
+  }
+
+  .timeline-date {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 0.4rem;
+  }
+
+  .timeline-text {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: #666;
+    text-align: center;
+    padding: 2rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    border-top: 3px solid var(--saffron);
+  }
+
+  footer span { color: var(--saffron); }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-featured { display: none; }
+    .main { grid-template-columns: 1fr; }
+    .sidebar { order: -1; }
+    nav { display: none; }
+  }
+
+  /* ANIMATIONS */
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .startup-card { animation: slideIn 0.4s ease backwards; }
+  .startup-card:nth-child(1) { animation-delay: 0.05s; }
+  .startup-card:nth-child(2) { animation-delay: 0.1s; }
+  .startup-card:nth-child(3) { animation-delay: 0.15s; }
+  .startup-card:nth-child(4) { animation-delay: 0.2s; }
+  .startup-card:nth-child(5) { animation-delay: 0.25s; }
+  .startup-card:nth-child(6) { animation-delay: 0.3s; }
+  .startup-card:nth-child(7) { animation-delay: 0.35s; }
+  .startup-card:nth-child(8) { animation-delay: 0.4s; }
+
+  .contribute-box {
+    background: linear-gradient(135deg, var(--saffron), var(--gold));
+    color: #fff;
+    padding: 1.5rem;
+    border-radius: 4px;
+    text-align: center;
+  }
+
+  .contribute-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .contribute-box p {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+  }
+
+  .btn {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 18px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+  }
+
+  .btn-dark { background: var(--ink); color: #fff; }
+  .btn-dark:hover { background: #333; }
+
+  .no-results {
+    padding: 3rem;
+    text-align: center;
+    color: var(--muted);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="logo">
+      <span class="logo-shark">🦈 Tank Watch</span>
+      <span class="logo-sub">India</span>
+    </div>
+    <nav>
+      <a href="#" class="active">Startups</a>
+      <a href="#">Sharks</a>
+      <a href="#">Season Guide</a>
+      <a href="#">About</a>
+      <span class="live-tag">● S5 LIVE</span>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <p class="hero-eyebrow">India's Only Dedicated Tracker</p>
+      <h1 class="hero-title">What happened after <span>the deal?</span></h1>
+      <p class="hero-desc">Track real post-show updates for every startup that appeared on Shark Tank India — from Season 1 to Season 5. Are they thriving, struggling, or shut down? Find out here.</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">450+</span>
+          <span class="stat-label">Startups Tracked</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">₹340Cr</span>
+          <span class="stat-label">Total Deals (Aired)</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-num">5</span>
+          <span class="stat-label">Seasons Covered</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-featured">
+      <p class="featured-tag">Featured Update</p>
+      <h2 class="featured-company">Snitch</h2>
+      <p class="featured-meta">S2 · Fashion/D2C · Deal: ₹1.5Cr for 1.5%</p>
+      <div class="featured-update">
+        <p>Snitch has become India's first Shark Tank India alumni to hit unicorn territory — reaching a ₹2,500 Cr valuation with ₹520 Cr in FY25 revenue, just 3 years post-show.</p>
+      </div>
+      <span class="status-badge badge-thriving">Thriving</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATUS OVERVIEW -->
+<div class="status-overview">
+  <div class="status-overview-inner">
+    <div class="overview-item">
+      <div class="overview-dot" style="background:#2ECC71"></div>
+      <div>
+        <div class="overview-count">187</div>
+        <div class="overview-label" style="color:#2ECC71">Thriving</div>
+      </div>
+    </div>
+    <div class="overview-item">
+      <div class="overview-dot" style="background:#82E030"></div>
+      <div>
+        <div class="overview-count">134</div>
+        <div class="overview-label" style="color:#82E030">Growing</div>
+      </div>
+    </div>
+    <div class="overview-item">
+      <div class="overview-dot" style="background:#E88020"></div>
+      <div>
+        <div class="overview-count">68</div>
+        <div class="overview-label" style="color:#E88020">Struggling</div>
+      </div>
+    </div>
+    <div class="overview-item">
+      <div class="overview-dot" style="background:#E04040"></div>
+      <div>
+        <div class="overview-count">29</div>
+        <div class="overview-label" style="color:#E04040">Closed</div>
+      </div>
+    </div>
+    <div class="overview-item">
+      <div class="overview-dot" style="background:#20A0E8"></div>
+      <div>
+        <div class="overview-count">14</div>
+        <div class="overview-label" style="color:#20A0E8">Acquired</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters-bar">
+  <div class="filters-inner">
+    <span class="filter-label">Filter:</span>
+    <div class="filter-chips" id="statusFilters">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="thriving">Thriving</button>
+      <button class="chip" data-filter="growing">Growing</button>
+      <button class="chip" data-filter="struggling">Struggling</button>
+      <button class="chip" data-filter="closed">Closed</button>
+      <button class="chip" data-filter="acquired">Acquired</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search startup..." />
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+  <div>
+    <div style="margin-bottom: 1.5rem;">
+      <div class="season-tabs" id="seasonTabs">
+        <div class="season-tab active" data-season="all">All</div>
+        <div class="season-tab" data-season="S1">S1</div>
+        <div class="season-tab" data-season="S2">S2</div>
+        <div class="season-tab" data-season="S3">S3</div>
+        <div class="season-tab" data-season="S4">S4</div>
+        <div class="season-tab" data-season="S5">S5</div>
+      </div>
+    </div>
+
+    <div class="section-header">
+      <h2 class="section-title">Startup Updates</h2>
+      <span class="section-count" id="resultCount">12 results</span>
+    </div>
+
+    <div class="startup-grid" id="startupGrid">
+      <!-- Cards injected by JS -->
+    </div>
+    <div class="no-results hidden" id="noResults">No startups found. Try a different search.</div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-block">
+      <div class="sidebar-header">🦈 Shark Leaderboard (S4)</div>
+      <div class="sidebar-content">
+        <div class="shark-row">
+          <span class="shark-rank">1</span>
+          <div class="shark-avatar" style="background:#1A3A1A; color:#2ECC71">AG</div>
+          <div class="shark-info">
+            <div class="shark-name">Aman Gupta</div>
+            <div class="shark-company-tag">boAt</div>
+          </div>
+          <span class="shark-amount">₹17.4Cr</span>
+        </div>
+        <div class="shark-row">
+          <span class="shark-rank">2</span>
+          <div class="shark-avatar" style="background:#1A1A3A; color:#6070E8">RA</div>
+          <div class="shark-info">
+            <div class="shark-name">Ritesh Agarwal</div>
+            <div class="shark-company-tag">OYO</div>
+          </div>
+          <span class="shark-amount">₹16.3Cr</span>
+        </div>
+        <div class="shark-row">
+          <span class="shark-rank">3</span>
+          <div class="shark-avatar" style="background:#3A1A1A; color:#E88060">NT</div>
+          <div class="shark-info">
+            <div class="shark-name">Namita Thapar</div>
+            <div class="shark-company-tag">Emcure</div>
+          </div>
+          <span class="shark-amount">₹14.1Cr</span>
+        </div>
+        <div class="shark-row">
+          <span class="shark-rank">4</span>
+          <div class="shark-avatar" style="background:#3A2A0A; color:#E8B040">PB</div>
+          <div class="shark-info">
+            <div class="shark-name">Peyush Bansal</div>
+            <div class="shark-company-tag">Lenskart</div>
+          </div>
+          <span class="shark-amount">₹12.8Cr</span>
+        </div>
+        <div class="shark-row">
+          <span class="shark-rank">5</span>
+          <div class="shark-avatar" style="background:#1A3A3A; color:#20C0C0">VS</div>
+          <div class="shark-info">
+            <div class="shark-name">Vineeta Singh</div>
+            <div class="shark-company-tag">SUGAR</div>
+          </div>
+          <span class="shark-amount">₹11.2Cr</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-header">📊 Deal Reality Check</div>
+      <div class="sidebar-content">
+        <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.5;">Of all deals made on air, only a fraction close after due diligence.</p>
+        <div class="reality-meter">
+          <div class="reality-label"><span>Deals Closed (Confirmed)</span><span>~16%</span></div>
+          <div class="reality-bar"><div class="reality-fill" style="width: 16%; background: #2ECC71;"></div></div>
+        </div>
+        <div class="reality-meter">
+          <div class="reality-label"><span>High Probability Closure</span><span>~60%</span></div>
+          <div class="reality-bar"><div class="reality-fill" style="width: 60%; background: var(--gold);"></div></div>
+        </div>
+        <div class="reality-meter">
+          <div class="reality-label"><span>Deals That Fell Through</span><span>~24%</span></div>
+          <div class="reality-bar"><div class="reality-fill" style="width: 24%; background: #E04040;"></div></div>
+        </div>
+        <p style="font-family: 'Space Mono', monospace; font-size: 0.58rem; color: #BBB; margin-top: 0.75rem; line-height: 1.6;">Based on S4 data. Deals shown on TV are Letters of Intent, not final agreements.</p>
+      </div>
+    </div>
+
+    <div class="sidebar-block">
+      <div class="sidebar-header">📰 Latest News</div>
+      <div class="sidebar-content">
+        <div class="news-item">
+          <div class="news-company">Snitch</div>
+          <div class="news-text">Reaches ₹2,500 Cr valuation — first STI alumni to near unicorn status. ₹520 Cr in FY25 revenue.</div>
+          <div class="news-date">FEB 2026</div>
+        </div>
+        <div class="news-item">
+          <div class="news-company">str8bat</div>
+          <div class="news-text">Closes $3.5M Series B funding round, expanding beyond cricket into multi-sport analytics.</div>
+          <div class="news-date">OCT 2025</div>
+        </div>
+        <div class="news-item">
+          <div class="news-company">boAt (via Aman)</div>
+          <div class="news-text">Three portfolio startups from S4 collectively cross ₹100Cr ARR mark within 18 months of airing.</div>
+          <div class="news-date">SEP 2025</div>
+        </div>
+        <div class="news-item">
+          <div class="news-company">Skippi Ice Pops</div>
+          <div class="news-text">Expands to 15,000+ retail outlets after post-show spike; launches export to UAE and Southeast Asia.</div>
+          <div class="news-date">AUG 2025</div>
+        </div>
+        <div class="news-item">
+          <div class="news-company">Kabira Mobility</div>
+          <div class="news-text">Ceases operations amid EV funding winter. Assets being evaluated for acquisition.</div>
+          <div class="news-date">JUL 2025</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="contribute-box">
+      <h3>Know an Update?</h3>
+      <p>Help keep Tank Watch India accurate. Submit news or corrections about any startup.</p>
+      <a href="#" class="btn btn-dark">Submit Update</a>
+    </div>
+
+  </aside>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div id="modal-status-badge" style="margin-bottom: 0.5rem;"></div>
+        <div class="modal-title" id="modal-title">Company Name</div>
+        <p style="font-family: 'Space Mono', monospace; font-size: 0.65rem; color: #666; margin-top: 0.5rem;" id="modal-meta">Season · Sector</p>
+      </div>
+      <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-section">
+        <p class="modal-section-title">The Deal</p>
+        <div class="modal-deal-box" id="modal-deal-box"></div>
+      </div>
+      <div class="modal-section">
+        <p class="modal-section-title">Current Status</p>
+        <p class="modal-text" id="modal-status-text"></p>
+      </div>
+      <div class="modal-section">
+        <p class="modal-section-title">Timeline</p>
+        <div class="timeline" id="modal-timeline"></div>
+      </div>
+      <div class="modal-section">
+        <p class="modal-section-title">Sharks Involved</p>
+        <div id="modal-sharks" style="display:flex; gap:0.5rem; flex-wrap:wrap;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>🦈 <span>Tank Watch India</span> — Independent startup tracker. Not affiliated with Sony LIV or Shark Tank India.</p>
+  <p style="margin-top: 0.5rem;">Data sourced from public records, company announcements & press reports. Last updated Feb 2026.</p>
+</footer>
+
+<script>
+const STARTUPS = [
+  {
+    id: 1,
+    name: "Snitch",
+    season: "S2",
+    sector: "Fashion / D2C",
+    deal: "₹1.5Cr for 1.5%",
+    ask: "₹1.5Cr for 1%",
+    valuation: "₹100Cr (aired)",
+    sharks: ["Aman Gupta"],
+    status: "thriving",
+    summary: "India's biggest Shark Tank India success story. Snitch has grown to become a near-unicorn menswear brand with ₹520 Cr in FY25 revenue and a ₹2,500 Cr valuation — an extraordinary 25x jump from its aired valuation in just 3 years.",
+    fullStatus: "Snitch has become the crown jewel of Shark Tank India alumni. From a ₹100Cr valuation on air to ₹2,500Cr, they've redefined what post-show growth can look like. The brand expanded aggressively into quick commerce via Blinkit and Zepto, and opened 40+ exclusive stores nationwide. Their social media strategy and influencer-driven launches have been textbook D2C growth.",
+    timeline: [
+      { date: "Jan 2023", text: "Aired on Shark Tank India S2. Deal closed with Aman Gupta." },
+      { date: "Dec 2023", text: "Crosses ₹200Cr ARR. Opens first 5 physical stores." },
+      { date: "Jun 2024", text: "Raises ₹100Cr Series A from Peak XV Partners (Sequoia India). Launches quick commerce." },
+      { date: "Mar 2025", text: "Reports ₹520Cr FY25 revenue. Valuation hits ₹2,500Cr." },
+      { date: "Feb 2026", text: "Expanding internationally. Eyeing Series B for global push." }
+    ]
+  },
+  {
+    id: 2,
+    name: "boAt (Skippi Ice Pops)",
+    name: "Skippi Ice Pops",
+    season: "S1",
+    sector: "Food & Beverage",
+    deal: "₹1Cr for 15%",
+    ask: "₹1Cr for 10%",
+    valuation: "₹6.67Cr (aired)",
+    sharks: ["Aman Gupta", "Vineeta Singh", "Ghazal Alagh"],
+    status: "thriving",
+    summary: "From a Hyderabad kitchen experiment to 15,000+ retail outlets. Skippi became the first natural ice pop brand to crack modern trade at scale in India, and now exports to UAE and Southeast Asia.",
+    fullStatus: "Skippi Ice Pops used the Shark Tank spotlight brilliantly — orders spiked 10x on the night of airing alone. They've since expanded to 15,000+ retail outlets including DMart, Reliance Smart, and BigBasket. The company launched 12 new flavours and a premium 'Skippi Gold' line. Export to UAE markets started in Q1 2025.",
+    timeline: [
+      { date: "Dec 2021", text: "Aired on STI S1. Secured deal from 3 sharks — highest interest of S1." },
+      { date: "Mar 2022", text: "Website crashes from post-show demand. Fulfillment issues temporarily." },
+      { date: "Nov 2022", text: "Enters 5,000+ stores across Tier 1 cities." },
+      { date: "Jun 2024", text: "Crosses 15,000 retail touchpoints. UAE export begins." },
+      { date: "Aug 2025", text: "Reports ₹45Cr ARR. Plans for Southeast Asia expansion announced." }
+    ]
+  },
+  {
+    id: 3,
+    name: "Get-A-Whey",
+    season: "S1",
+    sector: "Health & Nutrition",
+    deal: "₹75L for 7.5%",
+    ask: "₹75L for 5%",
+    valuation: "₹10Cr (aired)",
+    sharks: ["Namita Thapar", "Ashneer Grover"],
+    status: "growing",
+    summary: "India's premium whey-protein ice cream brand continues to grow steadily. Now available in 500+ outlets and via quick commerce, though growth has been more measured than initially projected.",
+    fullStatus: "Get-A-Whey has maintained a steady growth trajectory, carving out a niche in the premium healthy desserts market. They've expanded SKUs to include protein bars and yogurt bites alongside their core ice creams. Namita Thapar's pharma network helped with institutional partnerships, including a B2B deal with some gym chains.",
+    timeline: [
+      { date: "Jan 2022", text: "Aired on STI S1. Deal with Namita and Ashneer closed." },
+      { date: "Aug 2022", text: "Ashneer exits BharatPe in controversy. Investment remains with company." },
+      { date: "Apr 2023", text: "Launches 3 new SKUs: protein bars and yogurt bites." },
+      { date: "Jan 2025", text: "Available on Swiggy Instamart and Blinkit. 500+ outlet presence." },
+      { date: "Oct 2025", text: "Reports ₹18Cr ARR. Exploring Series A for ₹50Cr target." }
+    ]
+  },
+  {
+    id: 4,
+    name: "str8bat",
+    season: "S3",
+    sector: "Sports Tech",
+    deal: "₹70L for 5%",
+    ask: "₹70L for 3%",
+    valuation: "₹14Cr (aired)",
+    sharks: ["Ritesh Agarwal", "Aman Gupta"],
+    status: "thriving",
+    summary: "The cricket bat sensor company punched above its weight — closing a $3.5M Series B in October 2025 and expanding into multi-sport analytics. Now partnered with 3 IPL academies.",
+    fullStatus: "str8bat has become a standout sports-tech success. Their AI-powered cricket bat sensor gives real-time feedback on batting technique, and they've cracked the coaching market with partnerships at elite academies. The $3.5M Series B (Oct 2025) will fund expansion into badminton and tennis sensors, plus a data analytics SaaS platform for coaches.",
+    timeline: [
+      { date: "Feb 2024", text: "Aired on STI S3. Gets deal from Ritesh Agarwal and Aman Gupta." },
+      { date: "Jun 2024", text: "Pilots with 3 IPL franchise academies including KKR and MI." },
+      { date: "Jan 2025", text: "Crosses 10,000 units sold. Launches B2B academy subscription model." },
+      { date: "Oct 2025", text: "Closes $3.5M Series B. Multi-sport expansion announced." },
+      { date: "Feb 2026", text: "Partnered with BCCI for grassroots talent identification program." }
+    ]
+  },
+  {
+    id: 5,
+    name: "Kabira Mobility",
+    season: "S2",
+    sector: "Electric Vehicles",
+    deal: "No Deal",
+    ask: "₹10Cr for 5%",
+    valuation: "₹200Cr (asked)",
+    sharks: [],
+    status: "closed",
+    summary: "The Goa-based EV motorcycle startup could not secure investor interest on the show, and ultimately ceased operations in mid-2025 amid the EV funding winter. Assets are being evaluated for acquisition.",
+    fullStatus: "Kabira Mobility's story is a cautionary tale of the EV sector's brutal capital requirements. They entered Shark Tank India S2 with a slick pitch and premium EV motorcycles, but sharks passed citing valuation concerns. Post-show, they struggled to raise institutional funding as the EV sector tightened. By July 2025, operations wound down. Their IP and manufacturing jigs are reportedly being evaluated by a larger two-wheeler OEM.",
+    timeline: [
+      { date: "Mar 2023", text: "Aired on STI S2. All sharks pass on the deal." },
+      { date: "Sep 2023", text: "Secures small angel round of ₹2Cr to continue R&D." },
+      { date: "Apr 2024", text: "Misses government EV subsidy eligibility. Cash flow worsens." },
+      { date: "Jan 2025", text: "Founders announce restructuring. 60% workforce let go." },
+      { date: "Jul 2025", text: "Operations cease. Asset evaluation underway." }
+    ]
+  },
+  {
+    id: 6,
+    name: "Nua Woman",
+    season: "S1",
+    sector: "Femtech / Healthcare",
+    deal: "₹50L for 10%",
+    ask: "₹50L for 5%",
+    valuation: "₹5Cr (aired)",
+    sharks: ["Vineeta Singh"],
+    status: "thriving",
+    summary: "India's customisable period care brand has scaled remarkably with Vineeta Singh's mentorship. Now India's #2 D2C period care brand by revenue, with plans for international expansion.",
+    fullStatus: "Nua Woman benefited enormously from Vineeta Singh's deep expertise in D2C consumer brands. They pioneered the 'build your own period kit' model and expanded into intimate wellness products, reproductive health supplements, and a period tracking app. Their subscription revenue provides strong recurring income. The brand now ships to over 22,000 pin codes.",
+    timeline: [
+      { date: "Jan 2022", text: "Aired on STI S1. Deal with Vineeta Singh closes." },
+      { date: "Oct 2022", text: "Raises Series A of ₹15Cr. Expands product line beyond period care." },
+      { date: "Jul 2023", text: "Launches reproductive health supplement range. App crosses 5L downloads." },
+      { date: "Mar 2025", text: "Reports ₹70Cr ARR. #2 D2C period brand in India." },
+      { date: "Nov 2025", text: "Exploring expansion to UK Indian diaspora market." }
+    ]
+  },
+  {
+    id: 7,
+    name: "Agrani Homes",
+    season: "S4",
+    sector: "Real Estate Tech",
+    deal: "No Deal",
+    ask: "₹1Cr for 1%",
+    valuation: "₹100Cr (asked)",
+    sharks: [],
+    status: "struggling",
+    summary: "The affordable housing startup from S4 has struggled to gain traction post-show. The unit economics were questioned by sharks on air, and those concerns seem to have resonated with institutional investors too.",
+    fullStatus: "Agrani Homes pitched a technology-enabled affordable housing model for Tier 2-3 cities. Sharks grilled the founders on margins and scalability, and the deal fell through on air. Post-show, they've had difficulty closing institutional rounds, with multiple term sheets reportedly not converting. The affordable housing space requires patient capital that has been hard to find.",
+    timeline: [
+      { date: "Jan 2025", text: "Aired on STI S4. No deal from any shark." },
+      { date: "Apr 2025", text: "Raises small angel round from real estate family offices." },
+      { date: "Aug 2025", text: "Pivots slightly to rental housing management tech to improve margins." },
+      { date: "Jan 2026", text: "Operations continue in Jaipur and Indore. Searching for Series A." }
+    ]
+  },
+  {
+    id: 8,
+    name: "FAE Beauty",
+    season: "S4",
+    sector: "Beauty / D2C",
+    deal: "₹1Cr for 2%",
+    ask: "₹1Cr for 2%",
+    valuation: "₹50Cr (aired)",
+    sharks: ["Namita Thapar", "Vineeta Singh"],
+    status: "growing",
+    summary: "India's first D2C brand built specifically for brown skin tones has seen strong post-show growth. Featured in Vogue India and now stocked in Nykaa — with a community of 2L+ engaged followers.",
+    fullStatus: "FAE Beauty (Free And Equal Beauty) created a category: skincare and makeup for brown, olive, and South Asian skin tones that have long been underserved by Western brands. Post-show, the Nykaa listing has been transformative for them, and editorial coverage in Vogue India gave major brand validation. They're growing at ~3x YoY with a strong repeat purchase rate.",
+    timeline: [
+      { date: "Feb 2025", text: "Aired on STI S4. Secures deal with both Namita and Vineeta." },
+      { date: "Apr 2025", text: "Featured in Vogue India 'Game Changers' issue." },
+      { date: "Jun 2025", text: "Listed on Nykaa. Monthly orders triple within first 2 months." },
+      { date: "Nov 2025", text: "Community crosses 2L followers. Launches shade-extension quiz tool." },
+      { date: "Jan 2026", text: "Reports 3x YoY growth. Eyes international South Asian markets." }
+    ]
+  },
+  {
+    id: 9,
+    name: "Jugaadu Kamlesh (Barrix Agro)",
+    season: "S1",
+    sector: "AgriTech",
+    deal: "₹30L for 15%",
+    ask: "₹30L for 10%",
+    valuation: "₹2Cr (aired)",
+    sharks: ["Ghazal Alagh", "Vineeta Singh"],
+    status: "growing",
+    summary: "The Karnataka farmer who invented eco-friendly insect traps and captured hearts on S1 has turned his jugaad solution into a proper agritech company. Now sells in 8 states with government contracts.",
+    fullStatus: "Kamlesh Nanasaheb Gadade, the self-taught innovator behind Barrix Agro Sciences' insect management traps, became one of STI S1's most beloved stories. Post-show, Ghazal Alagh and Vineeta Singh helped professionalize operations. They secured state agriculture department contracts in Karnataka, Maharashtra, and Gujarat. The company now trains 500+ farmers as distributors.",
+    timeline: [
+      { date: "Jan 2022", text: "Aired on STI S1. Emotional segment goes viral. Deal with Ghazal and Vineeta." },
+      { date: "Jul 2022", text: "Karnataka agriculture dept signs pilot contract. First institutional customer." },
+      { date: "Mar 2023", text: "Expands to 8 states. Distributor network of 500+ farmer-entrepreneurs." },
+      { date: "Dec 2024", text: "Exports to Sri Lanka begin. Looking at Bangladesh next." },
+      { date: "Nov 2025", text: "Reports ₹12Cr revenue. Kamlesh featured on Forbes India Agri list." }
+    ]
+  },
+  {
+    id: 10,
+    name: "Wakao Foods",
+    season: "S2",
+    sector: "Food / Plant-based",
+    deal: "₹60L for 6%",
+    ask: "₹60L for 5%",
+    valuation: "₹10Cr (aired)",
+    sharks: ["Anupam Mittal", "Vineeta Singh"],
+    status: "growing",
+    summary: "India's jackfruit-based meat alternative brand has carved out a strong niche in the plant-based food category. Now stocked in 1,200+ modern retail outlets including Whole Foods UK.",
+    fullStatus: "Wakao Foods' jackfruit-as-meat products (pulled jackfruit, jackfruit tikka) found a market not just among vegetarians but also flexitarians. Anupam Mittal connected them with restaurant chains; Vineeta's retail network opened FMCG doors. The Whole Foods UK listing (Feb 2025) is their biggest international milestone.",
+    timeline: [
+      { date: "Feb 2023", text: "Aired on STI S2. Secures deal with Anupam Mittal and Vineeta Singh." },
+      { date: "Oct 2023", text: "Listed in Godrej Nature's Basket and Reliance Smart stores." },
+      { date: "Jun 2024", text: "Raises ₹8Cr Series A from alternative protein-focused VC." },
+      { date: "Feb 2025", text: "Listed in Whole Foods UK — first STI plant-based brand in UK premium retail." },
+      { date: "Jan 2026", text: "1,200+ domestic outlets. Working on shelf-stable jackfruit jerky line." }
+    ]
+  },
+  {
+    id: 11,
+    name: "Tagz Foods",
+    season: "S2",
+    sector: "Food / Snacks",
+    deal: "₹70L for 1.75%",
+    ask: "₹70L for 1%",
+    valuation: "₹40Cr (aired)",
+    sharks: ["Peyush Bansal"],
+    status: "acquired",
+    summary: "The pressure-popped chip brand that disrupted the Rs 27,000 Cr Indian snacks market was acquired by a major FMCG group in 2025, providing a strong exit for founders and investors.",
+    fullStatus: "Tagz Foods' '40% less fat than regular chips' messaging resonated widely. After the show, distribution exploded — they entered quick commerce, modern trade, and D2C simultaneously. In Q2 2025, a large FMCG conglomerate (undisclosed, reportedly ITC or Haldiram's family) acquired a majority stake, providing liquidity for early investors and a distribution moat for the brand.",
+    timeline: [
+      { date: "Mar 2023", text: "Aired on STI S2. Peyush Bansal invests, gets 1.75% equity." },
+      { date: "Sep 2023", text: "Enters Swiggy Instamart and Blinkit. Online orders up 8x." },
+      { date: "Feb 2024", text: "Listed in Big Bazaar, DMart, and Spencer's nationwide." },
+      { date: "Oct 2024", text: "Reports ₹80Cr ARR. Strategic acquisition talks begin." },
+      { date: "Apr 2025", text: "Majority stake acquired by undisclosed FMCG major. Founders continue as operators." }
+    ]
+  },
+  {
+    id: 12,
+    name: "Farmley",
+    season: "S3",
+    sector: "Food / Dry Fruits",
+    deal: "₹1Cr for 1%",
+    ask: "₹1Cr for 1%",
+    valuation: "₹100Cr (aired)",
+    sharks: ["Aman Gupta", "Peyush Bansal"],
+    status: "thriving",
+    summary: "India's fastest-growing premium dry fruits and nuts brand is growing at 4x YoY. A post-show fundraise at ₹400Cr valuation signals strong investor confidence in the premium snacks category.",
+    fullStatus: "Farmley's focus on premium, transparent sourcing (traceable to farm) and smart packaging has found strong product-market fit. They sell via D2C, quick commerce, and modern retail. Aman Gupta's boAt-influenced D2C playbook and Peyush's brand-building guidance accelerated their go-to-market. A ₹30Cr follow-on funding at ₹400Cr valuation (4x the aired valuation) in late 2024 validates the trajectory.",
+    timeline: [
+      { date: "Feb 2024", text: "Aired on STI S3. Both Aman and Peyush invest at ₹100Cr valuation." },
+      { date: "Aug 2024", text: "Quick commerce (Blinkit, Zepto) becomes largest revenue channel." },
+      { date: "Nov 2024", text: "Raises ₹30Cr at ₹400Cr valuation from institutional investors." },
+      { date: "Jun 2025", text: "4x YoY growth. Enters gifting segment with premium hamper SKUs." },
+      { date: "Jan 2026", text: "Launches 3 new product lines: nut butters, trail mixes, and flavored nuts." }
+    ]
+  }
+];
+
+const statusColorMap = {
+  thriving: 'badge-thriving',
+  growing: 'badge-growing',
+  struggling: 'badge-struggling',
+  closed: 'badge-closed',
+  acquired: 'badge-acquired'
+};
+
+const cardColorMap = {
+  thriving: 'card-thriving',
+  growing: 'card-growing',
+  struggling: 'card-struggling',
+  closed: 'card-closed',
+  acquired: 'card-acquired'
+};
+
+const statusLabels = {
+  thriving: 'Thriving',
+  growing: 'Growing',
+  struggling: 'Struggling',
+  closed: 'Closed',
+  acquired: 'Acquired'
+};
+
+let activeFilter = 'all';
+let activeSeason = 'all';
+let searchQuery = '';
+
+function renderCards() {
+  const grid = document.getElementById('startupGrid');
+  const noResults = document.getElementById('noResults');
+  const resultCount = document.getElementById('resultCount');
+
+  const filtered = STARTUPS.filter(s => {
+    const statusOk = activeFilter === 'all' || s.status === activeFilter;
+    const seasonOk = activeSeason === 'all' || s.season === activeSeason;
+    const searchOk = searchQuery === '' || s.name.toLowerCase().includes(searchQuery.toLowerCase()) || s.sector.toLowerCase().includes(searchQuery.toLowerCase());
+    return statusOk && seasonOk && searchOk;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '';
+    noResults.classList.remove('hidden');
+  } else {
+    noResults.classList.add('hidden');
+    grid.innerHTML = filtered.map((s, i) => `
+      <div class="startup-card ${cardColorMap[s.status]}" onclick="openModal(${s.id})">
+        <div class="card-top">
+          <h3 class="card-company">${s.name}</h3>
+          <span class="status-badge ${statusColorMap[s.status]}">${statusLabels[s.status]}</span>
+        </div>
+        <div class="card-meta">
+          <span class="card-season">${s.season}</span>
+          <span class="card-sector">${s.sector}</span>
+          <span class="card-deal">${s.deal}</span>
+        </div>
+        <p class="card-update">${s.summary}</p>
+        <div class="card-footer">
+          <div class="card-sharks">
+            ${s.sharks.length > 0 ? s.sharks.map(sh => `<span class="shark-pill">${sh.split(' ').map(n=>n[0]).join('')} ${sh.split(' ').slice(-1)[0]}</span>`).join('') : '<span class="shark-pill" style="color:#E04040; background:#2E0A0A">No Deal</span>'}
+          </div>
+          <span class="card-timestamp">Updated Feb 2026</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  resultCount.textContent = `${filtered.length} result${filtered.length !== 1 ? 's' : ''}`;
+}
+
+function openModal(id) {
+  const s = STARTUPS.find(x => x.id === id);
+  if (!s) return;
+
+  document.getElementById('modal-title').textContent = s.name;
+  document.getElementById('modal-meta').textContent = `${s.season} · ${s.sector}`;
+  document.getElementById('modal-status-badge').innerHTML = `<span class="status-badge ${statusColorMap[s.status]}">${statusLabels[s.status]}</span>`;
+
+  document.getElementById('modal-deal-box').innerHTML = `
+    <div class="deal-field">
+      <span class="deal-field-label">Ask</span>
+      <span class="deal-field-value">${s.ask}</span>
+    </div>
+    <div class="deal-field">
+      <span class="deal-field-label">Deal Got</span>
+      <span class="deal-field-value">${s.deal}</span>
+    </div>
+    <div class="deal-field">
+      <span class="deal-field-label">Valuation</span>
+      <span class="deal-field-value">${s.valuation}</span>
+    </div>
+  `;
+
+  document.getElementById('modal-status-text').textContent = s.fullStatus;
+
+  document.getElementById('modal-timeline').innerHTML = s.timeline.map(t => `
+    <div class="timeline-item">
+      <div class="timeline-date">${t.date}</div>
+      <div class="timeline-text">${t.text}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('modal-sharks').innerHTML = s.sharks.length > 0
+    ? s.sharks.map(sh => `<span class="shark-pill" style="font-size:0.75rem; padding: 4px 12px;">${sh}</span>`).join('')
+    : '<span style="font-size:0.85rem; color:var(--muted);">No sharks invested on air</span>';
+
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+}
+
+// Filter chips
+document.getElementById('statusFilters').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) {
+    document.querySelectorAll('#statusFilters .chip').forEach(c => c.classList.remove('active'));
+    e.target.classList.add('active');
+    activeFilter = e.target.dataset.filter;
+    renderCards();
+  }
+});
+
+// Season tabs
+document.getElementById('seasonTabs').addEventListener('click', e => {
+  if (e.target.classList.contains('season-tab')) {
+    document.querySelectorAll('.season-tab').forEach(t => t.classList.remove('active'));
+    e.target.classList.add('active');
+    activeSeason = e.target.dataset.season;
+    renderCards();
+  }
+});
+
+// Search
+document.getElementById('searchInput').addEventListener('input', e => {
+  searchQuery = e.target.value;
+  renderCards();
+});
+
+// Keyboard close
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modalOverlay').classList.remove('open');
+});
+
+// Init
+renderCards();
+</script>
+</body>
+</html>
